@@ -15,7 +15,7 @@ export namespace Utility {
 
     export function autosize( element: HTMLElement ) {
         element.style.height = 'auto';
-        element.style.height = element.scrollHeight + 2 + 'px';
+        element.style.height = element.scrollHeight + 5 + 'px';
     }
 
 }

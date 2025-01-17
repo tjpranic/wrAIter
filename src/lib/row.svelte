@@ -60,6 +60,7 @@
                 height: 2em;
                 resize: vertical;
                 min-width: 0;
+                resize: none;
             }
         }
     }

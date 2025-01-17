@@ -120,6 +120,7 @@
                 min-height: 2em;
                 height: 2em;
                 resize: vertical;
+                resize: none;
             }
         }
         p {

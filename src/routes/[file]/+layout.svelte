@@ -12,10 +12,11 @@
             width: 99em;
             align-self: center;
             padding: 0.5em;
-            // background-color: #345;
+            background-color: #333;
         }
     }
     .page {
         padding: 0 1em 0 1em;
+        background-color: #333;
     }
 </style>
