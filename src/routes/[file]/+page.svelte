@@ -5,12 +5,12 @@
     import { goto } from '$app/navigation';
     import { page } from '$app/state';
 
-    import Header    from '$lib/header.svelte';
-    import Model     from '$lib/model.svelte';
-    import Divider   from '$lib/divider.svelte';
-    import File      from '$lib/file.svelte';
-    import Story     from '$lib/story.svelte';
-    import Settings  from '$lib/settings.svelte';
+    import Header   from '$lib/header.svelte';
+    import Model    from '$lib/model.svelte';
+    import Divider  from '$lib/divider.svelte';
+    import File     from '$lib/file.svelte';
+    import Story    from '$lib/story.svelte';
+    import Settings from '$lib/settings.svelte';
 
     // can't use at the moment because something broke somewhere
     // import Toaster from '$lib/toaster.svelte';
