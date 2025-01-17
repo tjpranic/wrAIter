@@ -1,0 +1,32 @@
+@import url( 'https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap' );
+
+:root {
+    background-color: #333;
+    color: #eee;
+    font-family: 'Inconsolata';
+}
+a, a:visited {
+    color: #eee;
+}
+a:hover {
+    color: #abc;
+}
+
+.green-text {
+    color: rgb( 25, 200, 25 );
+}
+.red-text {
+    color: rgb( 240, 35, 35 );
+}
+
+.toaster .wrapper .base {
+    background-color: #333;
+    color: #eee;
+    font-family: 'Inconsolata';
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
