@@ -1,6 +1,6 @@
 # wrAIter
 
-wrAIter is a simple LLM frontend written in Svelte 5
+wrAIter is a simple LLM frontend written with Svelte 5
 
 ## Installation
 
@@ -8,7 +8,7 @@ To install wrAIter, follow these steps:
 
 1. Clone the repository:
     ```sh
-    git clone https://gitlab.com/yourusername/wrAIter.git
+    git clone https://gitlab.com/tjpranic/wrAIter.git
     ```
 2. Navigate to the project directory:
     ```sh
