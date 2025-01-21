@@ -105,7 +105,7 @@
             selected = selected.slice( cutoffPoint );
         }
 
-        // console.log( selected );
+        console.log( selected );
 
         let storySoFar = '';
 
@@ -133,14 +133,14 @@
                 mode,
                 genre,
                 memory,
-                story,
+                storySoFar,
                 note,
                 prompt,
                 current
             }
         );
 
-        // console.log( text );
+        console.log( text );
 
         return text;
     }
@@ -291,6 +291,7 @@
         bind:content={story.content[index]}
         bind:modified={modified}
         generating={generating || file === EMPTY_FILE}
+        index={index}
         onsaved={( ) => modifyPassthrough( oncontentchanged )}
         onremoved={( ) => modifyPassthrough( oncontentremoved )}/>
 {/each}

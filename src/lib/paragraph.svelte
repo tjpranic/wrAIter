@@ -25,6 +25,7 @@
         content  = $bindable( ),
         modified = $bindable( ),
         generating,
+        index,
         onsaved,
         onremoved
     } = $props( );
@@ -95,7 +96,7 @@
         <p>{content.text}</p>
         <div class="controls">
             <Button onclick={edit}   disabled={generating}>Edit</Button>
-            <Button onclick={remove} disabled={generating}>Remove</Button>
+            <Button onclick={( ) => remove( index )} disabled={generating}>Remove</Button>
             <span>Tokens: {generating ? '...' : content.tokenCount}</span>
         </div>
     {:else}

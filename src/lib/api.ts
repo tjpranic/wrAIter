@@ -157,7 +157,7 @@ export namespace LLM {
             '{{{mode}}}'              +
             '{{{genre}}}'             +
             '{{{memory}}}'            +
-            '{{{story}}}'             +
+            '{{{storySoFar}}}'        +
             '<|im_end|>\n'            +
             '<|im_start|>user\n'      +
             '{{{note}}}'              +
@@ -167,14 +167,14 @@ export namespace LLM {
             '{{{current}}}'
         ),
         Mistral: Handlebars.compile(
-            '[INST] \n'    +
-            '{{{mode}}}'   +
-            '{{{genre}}}'  +
-            '{{{memory}}}' +
-            '{{{story}}}'  +
-            '{{{note}}}'   +
-            '{{{prompt}}}' +
-            ' [/INST]\n'   +
+            '[INST] \n'        +
+            '{{{mode}}}'       +
+            '{{{genre}}}'      +
+            '{{{memory}}}'     +
+            '{{{storySoFar}}}' +
+            '{{{note}}}'       +
+            '{{{prompt}}}'     +
+            ' [/INST]\n'       +
             '{{{current}}}'
         )
     }
