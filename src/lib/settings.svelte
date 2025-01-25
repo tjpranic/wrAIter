@@ -51,8 +51,10 @@
     {/snippet}
     {#snippet content( )}
         <select name="template" id="template" bind:value={settings.template} onchange={( ) => ontemplatechanged?.( )}>
+            <!-- TODO: load templates dynamically -->
             <option value="ChatML">ChatML</option>
             <option value="Mistral">Mistral</option>
+            <option value="Llama3">Llama3</option>
         </select>
     {/snippet}
 </Row>

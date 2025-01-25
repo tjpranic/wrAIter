@@ -50,11 +50,7 @@
             flex-direction: column;
 
             // TODO: move input and textarea into components
-            :global( input ) {
-                flex: 1;
-            }
             :global( textarea ) {
-                flex: 1;
                 box-sizing: border-box;
                 min-height: 2em;
                 height: 2em;

@@ -176,6 +176,19 @@ export namespace LLM {
             '{{{prompt}}}'     +
             ' [/INST]\n'       +
             '{{{current}}}'
+        ),
+        Llama3: Handlebars.compile(
+            '<|begin_of_text|>'         +
+            '<|start_header_id|>system' +
+            '<|end_header_id|>\n'       +
+            '{{{mode}}}'                +
+            '{{{genre}}}'               +
+            '{{{memory}}}'              +
+            '{{{storySoFar}}}'          +
+            '{{{note}}}'                +
+            '{{{prompt}}}'              +
+            '<|eot_id|>\n'              +
+            '{{{current}}}'
         )
     }
 
@@ -186,6 +199,9 @@ export namespace LLM {
             }
             case 'Mistral': {
                 return LLM.templates.Mistral( data );
+            }
+            case 'Llama3': {
+                return LLM.templates.Llama3( data );
             }
             default: {
                 return '';
