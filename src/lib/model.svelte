@@ -72,7 +72,7 @@
     #url {
         flex: 1;
         display: flex;
-        gap: 0.5em;
+        gap: 0.5rem;
         min-width: 0; // wtf css
 
         input {

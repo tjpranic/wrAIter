@@ -159,6 +159,6 @@
     #template {
         flex: 1;
         display: flex;
-        gap: 0.5em;
+        gap: 0.5rem;
     }
 </style>

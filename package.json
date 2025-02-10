@@ -42,10 +42,17 @@
     "type": "module",
     "dependencies": {
         "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
         "express": "^4.19.2",
         "handlebars": "^4.7.8",
         "node-fetch": "^3.3.2",
         "svelte-5-french-toast": "^2.0.1",
         "svelte-collapsible": "^0.3.1"
+    },
+    "prettier": {
+        "trailingComma": "none",
+        "useTabs": false,
+        "tabWidth": 4,
+        "singleQuote": true
     }
 }

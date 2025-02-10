@@ -1,4 +1,5 @@
-import { page } from '$app/state';
+import { page }        from '$app/state';
+import { PUBLIC_PORT } from '$env/static/public';
 
 import Handlebars from 'handlebars';
 
@@ -8,7 +9,7 @@ export namespace Server {
 
     export function URL( ): string {
         const host = page.url.hostname;
-        const port = settings.serverPort;
+        const port = PUBLIC_PORT || 3000;
 
         return `http://${host}:${port}`;
     }
@@ -377,7 +378,6 @@ export namespace Settings {
 
     export function defaults( ) {
         return {
-            serverPort:         3000,
             modelHost:          '127.0.0.1',
             modelPort:          5000,
             template:           'ChatML',

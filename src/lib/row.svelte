@@ -36,7 +36,7 @@
 
         .label {
             flex: 0.1;
-            min-width: 10em;
+            min-width: 10rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -52,8 +52,8 @@
             // TODO: move input and textarea into components
             :global( textarea ) {
                 box-sizing: border-box;
-                min-height: 2em;
-                height: 2em;
+                min-height: 2rem;
+                height: 2rem;
                 resize: vertical;
                 min-width: 0;
                 resize: none;

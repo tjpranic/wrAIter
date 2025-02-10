@@ -194,7 +194,7 @@
         .title {
             display: flex;
             margin: 0;
-            padding: 1em 1em 1em 2em;
+            padding: 1em 1em 1em 2rem;
             list-style-type: square;
 
             li {
@@ -203,7 +203,7 @@
             }
         }
         .content {
-            padding: 0 1em 1em 1em;
+            padding: 0 1em 1em 1rem;
         }
     }
     .keywords {

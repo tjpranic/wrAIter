@@ -108,7 +108,7 @@
     .content {
         border: 1px solid #999;
         // border-radius: 15px;
-        padding: 1em;
+        padding: 1rem;
         margin: 0.5em 0 0.5em 0;
 
         .editor {
@@ -118,8 +118,8 @@
             textarea {
                 width: 100%;
                 box-sizing: border-box;
-                min-height: 2em;
-                height: 2em;
+                min-height: 2rem;
+                height: 2rem;
                 resize: vertical;
                 resize: none;
             }

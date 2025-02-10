@@ -2,6 +2,7 @@ import express from 'express';
 import cors    from 'cors';
 import fs      from 'fs/promises';
 import fetch   from 'node-fetch';
+import dotenv  from 'dotenv';
 
 import { fileURLToPath } from 'url';
 import { dirname }       from 'path';
@@ -9,6 +10,8 @@ import { json }          from 'stream/consumers';
 import { Readable }      from 'stream';
 
 import { handler } from './build/handler.js';
+
+dotenv.config( );
 
 // lifted from SillyTavern
 function forwardFetchResponse( from, to ) {
@@ -532,8 +535,8 @@ app.use( '/api', router );
 app.use( handler );
 
 app.listen(
-    settings.serverPort,
+    process.env.PUBLIC_PORT || 3000,
     ( ) => {
-        console.log( `Listening on port ${settings.serverPort}...` );
+        console.log( `Listening on port ${process.env.PUBLIC_PORT}...` );
     }
 );

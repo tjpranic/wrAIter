@@ -9,14 +9,14 @@
 <style lang="scss">
     @media( min-width: 99em ) {
         .page {
-            width: 99em;
+            width: 99rem;
             align-self: center;
-            padding: 0.5em;
+            padding: 0.5rem;
             background-color: #333;
         }
     }
     .page {
-        padding: 0 1em 0 1em;
+        padding: 0 1em 0 1rem;
         background-color: #333;
     }
 </style>

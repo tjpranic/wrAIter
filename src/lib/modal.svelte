@@ -35,8 +35,8 @@
 
 <style lang="scss">
     dialog {
-        max-width: 32em;
-        border-radius: 0.2em;
+        max-width: 32rem;
+        border-radius: 0.2rem;
         border: none;
         padding: 0;
         background-color: #333;
@@ -46,14 +46,14 @@
         background: rgba(0, 0, 0, 0.3);
     }
     dialog > div {
-        padding: 0.5em;
+        padding: 0.5rem;
 
         .header {
             display: flex;
 
             .title {
                 flex: 1;
-                padding-right: 0.5em;
+                padding-right: 0.5rem;
             }
         }
     }

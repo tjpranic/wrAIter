@@ -1,5 +1,4 @@
 {
-    "serverPort": 3000,
     "modelHost": "127.0.0.1",
     "modelPort": 5000,
     "template": "ChatML",

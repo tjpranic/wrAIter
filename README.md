@@ -18,7 +18,8 @@ To install wrAIter, follow these steps:
     ```sh
     npm install
     ```
-4. Run
+4. Create a .env file (see .env.example for usage).
+5. Run
     Client:
     ```sh
     npm run dev
