@@ -239,12 +239,11 @@
 
                 &.included {
                     background-color: var( --success-color );
-                    color:          white;
+                    color:            var( --text-primary );
                 }
-
                 &.excluded {
                     background-color: var( --error-color );
-                    color:          white;
+                    color:            var( --text-primary );
                 }
             }
         }
@@ -276,7 +275,6 @@
                 align-items: center;
                 gap:         1rem;
 
-
                 .radio-group {
                     display:   flex;
                     flex-wrap: wrap;
@@ -298,7 +296,6 @@
     }
 
     .entry {
-        margin-top:       1.5rem;
         padding:          1.5rem;
         border: 1px solid var( --border-color );
         border-radius:    var( --border-radius );

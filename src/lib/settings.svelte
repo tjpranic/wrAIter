@@ -198,7 +198,6 @@
         .group-title {
             margin-top:    0;
             margin-bottom: 1rem;
-            color:         var( --accent-primary );
             position:      relative;
             display:       inline-block;
 
@@ -242,8 +241,8 @@
         input[type="range"] {
             flex:          1;
             height:        6px;
+            border-radius: 10px;
             background:    var( --bg-tertiary );
-            border-radius: 3px;
             outline:       none;
             appearance:    none;
 
@@ -260,7 +259,6 @@
                     background: var( --accent-hover );
                 }
             }
-
             &::-moz-range-thumb {
                 width:         16px;
                 height:        16px;

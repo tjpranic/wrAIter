@@ -15,7 +15,7 @@
     --text-muted:       #888888;
     --border-color:     #444444;
     --success-color:    #4caf50;
-    --error-color:      #cc2424;
+    --error-color:      #d43535;
     --warning-color:    #ff9800;
 
     --border-radius:    4px;
@@ -52,7 +52,7 @@ a:hover {
 }
 
 button {
-    padding:          0.5rem 1rem;
+    padding:          0.5rem;
     font-size:        1rem;
     background-color: var(--bg-tertiary );
     border: 1px solid var(--border-color );

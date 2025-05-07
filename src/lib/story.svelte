@@ -301,46 +301,50 @@
         <Button onclick={finish}>Finish</Button>
     </div>
 {/if}
-<Row style={ROW_STYLE_STACKED}>
-    {#snippet label( )}
-        <label for="prompt">Prompt:</label>
-    {/snippet}
-    {#snippet content( )}
-        <textarea
-            use:sizeOnLoad
-            bind:value={story.prompt}
-            class="prompt"
-            name="prompt"
-            onfocus={( e ) => Utility.autosize( e.currentTarget )}
-            oninput={( e ) => Utility.autosize( e.currentTarget )}
-            onkeyup={( ) => modifyPassthrough( onpromptchanged )}
-            disabled={generating || file === EMPTY_FILE}>
-        </textarea>
-        <div class="button-group">
-            <Button onclick={generate} disabled={!connected || generating} class="primary">Generate</Button>
-            {#if story.content[story.content.length - 1].text !== ''}
-                <Button onclick={regenerate} disabled={!connected || generating || story.content[story.content.length - 1].text === ''}>Regenerate</Button>
-            {/if}
-            <Button onclick={abort} disabled={!connected || !generating} class="danger">Abort</Button>
-        </div>
-    {/snippet}
-</Row>
-<Row style={ROW_STYLE_STACKED}>
-    {#snippet label( )}
-        <label for="note">Note:</label>
-    {/snippet}
-    {#snippet content( )}
-        <textarea
-            use:sizeOnLoad
-            bind:value={story.note}
-            name="note"
-            onfocus={( e ) => Utility.autosize( e.currentTarget )}
-            oninput={( e ) => Utility.autosize( e.currentTarget )}
-            onkeyup={( ) => modifyPassthrough( onnotechanged )}
-            disabled={generating || file === EMPTY_FILE}>
-        </textarea>
-    {/snippet}
-</Row>
+<div class="prompt-container">
+    <Row style={ROW_STYLE_STACKED}>
+        {#snippet label( )}
+            <label for="prompt">Prompt:</label>
+        {/snippet}
+        {#snippet content( )}
+            <textarea
+                use:sizeOnLoad
+                bind:value={story.prompt}
+                class="prompt"
+                name="prompt"
+                onfocus={( e ) => Utility.autosize( e.currentTarget )}
+                oninput={( e ) => Utility.autosize( e.currentTarget )}
+                onkeyup={( ) => modifyPassthrough( onpromptchanged )}
+                disabled={generating || file === EMPTY_FILE}>
+            </textarea>
+            <div class="controls">
+                <Button onclick={generate} disabled={!connected || generating} class="primary">Generate</Button>
+                {#if story.content[story.content.length - 1].text !== ''}
+                    <Button onclick={regenerate} disabled={!connected || generating || story.content[story.content.length - 1].text === ''}>Regenerate</Button>
+                {/if}
+                <Button onclick={abort} disabled={!connected || !generating} class="danger">Abort</Button>
+            </div>
+        {/snippet}
+    </Row>
+</div>
+<div class="note-container">
+    <Row style={ROW_STYLE_STACKED}>
+        {#snippet label( )}
+            <label for="note">Note:</label>
+        {/snippet}
+        {#snippet content( )}
+            <textarea
+                use:sizeOnLoad
+                bind:value={story.note}
+                name="note"
+                onfocus={( e ) => Utility.autosize( e.currentTarget )}
+                oninput={( e ) => Utility.autosize( e.currentTarget )}
+                onkeyup={( ) => modifyPassthrough( onnotechanged )}
+                disabled={generating || file === EMPTY_FILE}>
+            </textarea>
+        {/snippet}
+    </Row>
+</div>
 <Row style={ROW_STYLE_STACKED}>
     {#snippet label( )}
         <label for="memory">Memory:</label>
@@ -357,20 +361,37 @@
 </Row>
 
 <style lang="scss">
-    .controls {
-        display: flex;
-        gap:     0.5rem;
-        padding: 0 0 1em 0;
-    }
-
-    .prompt {
-        margin:           0 0 1em 0;
+    .prompt-container {
         padding:          1rem;
+        margin-bottom:    1rem;
         border-radius:    var( --border-radius );
-        background-color: var( --bg-input );
+        background-color: var( --bg-secondary );
+        border: 1px solid var( --border-color );
+
+        :global( .row:last-child ) {
+            padding-bottom: 0;
+        }
+
+        .prompt {
+            margin:           0 0 1em 0;
+            padding:          1rem;
+            border-radius:    var( --border-radius );
+            background-color: var( --bg-input );
+        }
+    }
+    .note-container {
+        padding:          1rem;
+        margin-bottom:    1rem;
+        border-radius:    var( --border-radius );
+        background-color: var( --bg-secondary );
+        border: 1px solid var( --border-color );
+
+        :global( .row:last-child ) {
+            padding-bottom: 0;
+        }
     }
 
-    .button-group {
+    .controls {
         display:    flex;
         gap:        0.5rem;
         margin-top: 0.5rem;
