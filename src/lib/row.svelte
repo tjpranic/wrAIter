@@ -32,40 +32,76 @@
 <style lang="scss">
     .row {
         display: flex;
-        padding: 0 0 0.5em 0;
+        padding: 0 0 1rem 0;
 
         .label {
-            flex: 0.1;
-            min-width: 10rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            align-self: start;
-        }
-        .content {
-            display: flex;
-            flex: 1.5;
-            min-width: 0;
-            align-self: center;
-            flex-direction: column;
+            flex:        0.2;
+            min-width:   8rem;
+            padding-top: 0.5rem;
+            font-weight: 500;
+            color:       var( --text-secondary );
 
-            // TODO: move input and textarea into components
+            :global( label ) {
+                display: inline-block;
+            }
+        }
+
+        .content {
+            display:        flex;
+            flex-direction: column;
+            flex:           1;
+            min-width:      0;
+
             :global( textarea ) {
+                padding:                 0.5rem;
+                min-height:              2.5rem;
+                height:                  2.5rem;
+                min-width:               0;
+                border-radius:           var( --border-radius );
+                background-color:        var( --bg-input );
+                border:        1px solid var( --border-color );
+                color:                   var( --text-primary );
+                transition: border-color var( --transition-speed ) ease;
+                resize:                  vertical;
+                box-sizing:              border-box;
+                font-family:             inherit;
+
+                &:focus {
+                    border-color: var( --accent-primary );
+                    outline:      none;
+                }
+
+                &:disabled {
+                    opacity: 0.6;
+                    cursor:  not-allowed;
+                }
+            }
+
+            :global( input ) {
+                height:     2.5rem;
                 box-sizing: border-box;
-                min-height: 2rem;
-                height: 2rem;
-                resize: vertical;
-                min-width: 0;
-                resize: none;
             }
         }
     }
+
     .row-stacked {
-        display: unset;
-        padding: 0 0 0.5em 0;
+        display:        flex;
+        flex-direction: column;
+        padding:        0 0 1.5rem 0;
 
         .label {
-            padding: 0.5em 0 0.5em 0;
+            padding: 0 0 0.5rem 0;
+        }
+    }
+
+    @media( max-width: 768px ) {
+        .row-side-by-side {
+            flex-direction: column;
+
+            .label {
+                padding:   0 0 0.5rem 0;
+                min-width: 100%;
+            }
         }
     }
 </style>

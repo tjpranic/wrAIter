@@ -139,29 +139,36 @@
     } );
 </script>
 
-<Row style={ROW_STYLE_SIDE_BY_SIDE}>
-    {#snippet label( )}
-        <label for="file">File:</label>
-    {/snippet}
-    {#snippet content( )}
-        <div id="files">
-            <select class="file" name="file" id="file" bind:value={file} onchange={loadFile} disabled={generating}>
-                {#if allFiles.length === 0}
-                    <option value={EMPTY_FILE}>[none]</option>
-                {:else}
-                    {#each allFiles as filename}
-                        <option value={filename}>{filename}</option>
-                    {/each}
-                {/if}
-            </select>
-            <Button onclick={openCreateFileDialog} disabled={generating}>New</Button>
-            {#if modified}<span>* </span>{/if}<Button onclick={saveFile} disabled={generating || file === EMPTY_FILE}>Save</Button>
-            <Button onclick={loadFile} disabled={generating || file === EMPTY_FILE}>Load</Button>
-            <Button onclick={openRenameFileDialog} disabled={generating || file === EMPTY_FILE}>Rename</Button>
-            <Button onclick={openDeleteFileDialog} disabled={generating || file === EMPTY_FILE}>Delete</Button>
-        </div>
-    {/snippet}
-</Row>
+<div class="file-container">
+    <Row style={ROW_STYLE_SIDE_BY_SIDE}>
+        {#snippet label( )}
+            <label for="file">File:</label>
+        {/snippet}
+        {#snippet content( )}
+            <div id="files">
+                <select class="file" name="file" id="file" bind:value={file} onchange={loadFile} disabled={generating}>
+                    {#if allFiles.length === 0}
+                        <option value={EMPTY_FILE}>[none]</option>
+                    {:else}
+                        {#each allFiles as filename}
+                            <option value={filename}>{filename}</option>
+                        {/each}
+                    {/if}
+                </select>
+                <div class="button-row">
+                    <Button onclick={openCreateFileDialog} disabled={generating} class="primary">New</Button>
+                    <div class="file-actions">
+                        {#if modified}<span class="modified-indicator">*</span>{/if}
+                        <Button onclick={saveFile} disabled={generating || file === EMPTY_FILE}>Save</Button>
+                        <Button onclick={loadFile} disabled={generating || file === EMPTY_FILE}>Load</Button>
+                        <Button onclick={openRenameFileDialog} disabled={generating || file === EMPTY_FILE}>Rename</Button>
+                        <Button onclick={openDeleteFileDialog} disabled={generating || file === EMPTY_FILE} class="danger">Delete</Button>
+                    </div>
+                </div>
+            </div>
+        {/snippet}
+    </Row>
+</div>
 
 <div id="create-file-dialog">
     <Modal
@@ -170,10 +177,12 @@
         cancel={closeCreateFileDialog}
         close={closeCreateFileDialog}>
         {#snippet title( )}
-            <h3>Create new file?</h3>
+            <h3>Create new file</h3>
         {/snippet}
         {#snippet content( )}
-            <input bind:value={newFile} type="text" placeholder="filename"/>
+            <div class="modal-content">
+                <input bind:value={newFile} type="text" placeholder="Enter filename"/>
+            </div>
         {/snippet}
     </Modal>
 </div>
@@ -185,10 +194,12 @@
         cancel={closeRenameFileDialog}
         close={closeRenameFileDialog}>
         {#snippet title( )}
-            <h3>Rename file?</h3>
+            <h3>Rename file</h3>
         {/snippet}
         {#snippet content( )}
-            <input bind:value={newFile} type="text" placeholder="filename"/>
+            <div class="modal-content">
+                <input bind:value={newFile} type="text" placeholder="Enter new filename"/>
+            </div>
         {/snippet}
     </Modal>
 </div>
@@ -200,29 +211,95 @@
         cancel={closeDeleteFileDialog}
         close={closeDeleteFileDialog}>
         {#snippet title( )}
-            <h3>Delete {file}?</h3>
+            <h3>Delete file</h3>
         {/snippet}
-        {#snippet content( )}{/snippet}
+        {#snippet content( )}
+            <p class="confirm-message">Are you sure you want to delete "{file}"?</p>
+        {/snippet}
     </Modal>
 </div>
 
 <style lang="scss">
-    #files {
-        flex: 1;
-        display: flex;
-        gap: 0.5rem;
+    .file-container {
+        padding:          1rem;
+        margin-bottom:    1rem;
+        border-radius:    var( --border-radius );
+        background-color: var( --bg-secondary );
+        border: 1px solid var( --border-color );
 
-        .file {
-            flex: 1;
+        :global( .row:last-child ) {
+            padding-bottom: 0;
         }
-    }
-    #create-file-dialog h3 {
-        margin: 0;
-    }
-    #rename-file-dialog h3 {
-        margin: 0;
-    }
-    #delete-file-dialog h3 {
-        margin: 0;
+
+        #files {
+            display:        flex;
+            flex-direction: column;
+            flex:           1;
+            gap:            0.5rem;
+
+            .file {
+                flex:             1;
+                padding:          0.5rem;
+                font-family:      inherit;
+                border-radius:    var( --border-radius );
+                background-color: var( --bg-input );
+                border: 1px solid var( --border-color );
+                color:            var( --text-primary );
+
+                &:focus {
+                    border-color: var( --accent-primary );
+                    outline:      none;
+                }
+            }
+
+            .button-row {
+                display:    flex;
+                flex-wrap:  wrap;
+                gap:        0.5rem;
+                margin-top: 0.5rem;
+
+                .file-actions {
+                    display: flex;
+                    flex:    1;
+                    gap:     0.5rem;
+
+                    .modified-indicator {
+                        margin-right: -0.3rem;
+                        font-size:     1.2rem;
+                        font-weight:   bold;
+                        align-self:    center;
+                        color:         var( --warning-color );
+                    }
+                }
+            }
+        }
+
+        .modal-content {
+            margin: 1rem 0;
+
+            input {
+                width:            100%;
+                padding:          0.5rem;
+                border-radius:    var( --border-radius );
+                background-color: var( --bg-input );
+                border: 1px solid var( --border-color );
+                color:            var( --text-primary );
+
+                &:focus {
+                    border-color: var( --accent-primary );
+                    outline:      none;
+                }
+            }
+        }
+
+        .confirm-message {
+            margin: 1rem 0;
+            color:  var( --text-primary );
+        }
+
+        h3 {
+            margin: 0;
+            color:  var( --text-primary );
+        }
     }
 </style>

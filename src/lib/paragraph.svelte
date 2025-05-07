@@ -90,14 +90,16 @@
                 disabled={generating}>
             </textarea>
         </div>
-        <Button onclick={save} disabled={generating}>Save</Button>
-        <Button onclick={cancel} disabled={generating}>Cancel</Button>
+        <div class="controls">
+            <Button onclick={save} disabled={generating} class="primary">Save</Button>
+            <Button onclick={cancel} disabled={generating}>Cancel</Button>
+        </div>
     {:else if content !== undefined && content.text !== ''}
         <p>{content.text}</p>
         <div class="controls">
-            <Button onclick={edit}   disabled={generating}>Edit</Button>
-            <Button onclick={( ) => remove( index )} disabled={generating}>Remove</Button>
-            <span>Tokens: {generating ? '...' : content.tokenCount}</span>
+            <Button onclick={edit} disabled={generating}>Edit</Button>
+            <Button onclick={( ) => remove( index )} disabled={generating} class="danger">Remove</Button>
+            <span class="token-count">Tokens: {generating ? '...' : content.tokenCount}</span>
         </div>
     {:else}
         <p>...</p>
@@ -106,34 +108,55 @@
 
 <style lang="scss">
     .content {
-        border: 1px solid #999;
-        // border-radius: 15px;
-        padding: 1rem;
-        margin: 0.5em 0 0.5em 0;
+        background-color: var( --bg-secondary );
+        border: 1px solid var( --border-color );
+        border-radius:    var( --border-radius );
+        padding:          1rem;
+        margin:           1rem 0;
+
 
         .editor {
-            display: flex;
+            display:        flex;
             flex-direction: column;
+            margin-bottom:  1rem;
 
             textarea {
-                width: 100%;
-                box-sizing: border-box;
-                min-height: 2rem;
-                height: 2rem;
-                resize: vertical;
-                resize: none;
+
+                background-color: var( --bg-input );
+                border: 1px solid var( --border-color );
+                border-radius:    var( --border-radius );
+                width:            100%;
+                box-sizing:       border-box;
+                resize:           vertical;
+                padding:          1rem;
+                color:            var( --text-primary );
+                font-family:      inherit;
+                line-height:      1.5;
+
+                &:focus {
+                    border-color: var( --accent-primary );
+                    outline:      none;
+                }
             }
         }
+
         p {
             white-space: pre-line;
+            line-height: 1.5;
+            margin:      0 0 1rem 0;
+            color:       var( --text-primary );
         }
-        .controls {
-            display: flex;
 
-            span {
-                flex: 1;
+        .controls {
+            display:     flex;
+            align-items: center;
+            gap:         0.5rem;
+
+            .token-count {
                 text-align: right;
-                align-self: center;
+                flex:       1;
+                font-size:  1rem;
+                color:      var( --text-muted );
             }
         }
     }

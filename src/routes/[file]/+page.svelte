@@ -89,7 +89,7 @@
 </script>
 
 <Header/>
-<hr/>
+<Divider style={DIVIDER_STYLE_SOLID}/>
 
 {#if ready}
     <div in:fade>
@@ -103,7 +103,7 @@
             onhostchanged={onSettingChanged}
             onportchanged={onSettingChanged}/>
         <Divider style={DIVIDER_STYLE_SOLID}/>
-        <h3>Story:</h3>
+        <h3>File:</h3>
         <File
             bind:file={file}
             bind:data={story}
@@ -114,6 +114,8 @@
             onload={onLoadFile}
             onrename={onRenameFile}
             ondelete={onDeleteFile}/>
+        <h3>Story:</h3>
+        <Divider style={DIVIDER_STYLE_SOLID}/>
         <Story
             bind:story={story}
             bind:modified={modified}
@@ -153,8 +155,40 @@
         <!-- <Toaster/> -->
     </div>
 {:else}
-    <h1>Loading...</h1>
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading...</div>
+    </div>
 {/if}
 
 <style lang="scss">
+    .loading-container {
+        display:         flex;
+        flex-direction:  column;
+        align-items:     center;
+        justify-content: center;
+        padding:         2rem;
+        gap:             1rem;
+    }
+
+    .loading-text {
+        color:       var( --accent-primary );
+        font-size:   1rem;
+        font-weight: 500;
+    }
+
+    .spinner {
+        width:  50px;
+        height: 50px;
+        border: 3px solid var( --bg-tertiary );
+        border-top-color: var( --accent-primary );
+        border-radius:    50%;
+        animation:        spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate( 360deg );
+        }
+    }
 </style>

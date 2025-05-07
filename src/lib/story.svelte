@@ -316,12 +316,12 @@
             onkeyup={( ) => modifyPassthrough( onpromptchanged )}
             disabled={generating || file === EMPTY_FILE}>
         </textarea>
-        <div>
-            <Button onclick={generate} disabled={!connected || generating}>Generate</Button>
+        <div class="button-group">
+            <Button onclick={generate} disabled={!connected || generating} class="primary">Generate</Button>
             {#if story.content[story.content.length - 1].text !== ''}
                 <Button onclick={regenerate} disabled={!connected || generating || story.content[story.content.length - 1].text === ''}>Regenerate</Button>
             {/if}
-            <Button onclick={abort} disabled={!connected || !generating}>Abort</Button>
+            <Button onclick={abort} disabled={!connected || !generating} class="danger">Abort</Button>
         </div>
     {/snippet}
 </Row>
@@ -358,9 +358,41 @@
 
 <style lang="scss">
     .controls {
-        padding: 0 0 0.5em 0;
+        display: flex;
+        gap:     0.5rem;
+        padding: 0 0 1em 0;
     }
+
     .prompt {
-        margin: 0 0 0.5em 0;
+        margin:           0 0 1em 0;
+        padding:          1rem;
+        border-radius:    var( --border-radius );
+        background-color: var( --bg-input );
+    }
+
+    .button-group {
+        display:    flex;
+        gap:        0.5rem;
+        margin-top: 0.5rem;
+
+        :global( button.primary ) {
+            background-color: var( --accent-primary );
+            border-color:     var( --accent-primary );
+
+            &:hover:not( :disabled ) {
+                background-color: var( --accent-hover );
+                border-color:     var( --accent-hover );
+            }
+        }
+
+        :global( button.danger ) {
+            background-color: var( --error-color );
+            border-color:     var( --error-color );
+
+            &:hover:not( :disabled ) {
+                background-color: color-mix( in srgb, var( --error-color ) 80%, white );
+                border-color:     color-mix( in srgb, var( --error-color ) 80%, white );
+            }
+        }
     }
 </style>

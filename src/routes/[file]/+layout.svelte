@@ -7,16 +7,17 @@
 </div>
 
 <style lang="scss">
-    @media( min-width: 99em ) {
-        .page {
-            width: 99rem;
-            align-self: center;
-            padding: 0.5rem;
-            background-color: #333;
-        }
-    }
     .page {
-        padding: 0 1em 0 1rem;
-        background-color: #333;
+        max-width:        99rem;
+        width:            100%;
+        margin:           0 auto;
+        padding:          1.5rem;
+        min-height:       100vh;
+        background-color: var( --bg-primary );
+        box-sizing:       border-box;
+
+        @media( min-width: 768px ) {
+            padding: 2rem;
+        }
     }
 </style>

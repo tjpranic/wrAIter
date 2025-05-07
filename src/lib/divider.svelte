@@ -12,12 +12,16 @@
 
 <style lang="scss">
     .solid {
-        border: 1px solid;
+        border: 0;
+        border-bottom: 1px solid;
+        color: var( --border-color );
     }
     .dashed {
         border: 1px dashed;
+        color: var( --border-color );
     }
     .dotted {
         border: 1px dotted;
+        color: var( --border-color );
     }
 </style>

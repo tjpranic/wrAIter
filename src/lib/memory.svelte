@@ -78,24 +78,25 @@
         {#each memory as entry, index}
             <div class="memory-entry">
                 <AccordionItem key={index}>
-                    <ul slot="header" class="title">
-                        <li>{entry.keywords}</li>
+                    <div slot="header" class="title">
+                        <span class="keywords">{entry.keywords}</span>
                         {#if entry.included === MEMORY_INCLUDE}
-                            <aside class="green-text">^ included</aside>
+                            <aside class="status included">included</aside>
                         {/if}
                         {#if entry.included === MEMORY_EXCLUDE}
-                            <aside class="red-text">^ excluded</aside>
+                            <aside class="status excluded">excluded</aside>
                         {/if}
                         {#if entry.included === MEMORY_AUTO}
                             {#if prompt.includes( entry.keywords )}
-                                <aside class="green-text">included</aside>
+                                <aside class="status included">auto-included</aside>
                             {:else}
-                                <aside class="red-text">excluded</aside>
+                                <aside class="status excluded">auto-excluded</aside>
                             {/if}
                         {/if}
-                    </ul>
+                    </div>
                     <div slot="body" class="content">
                         <div class="keywords">
+                            <label for="keywords">Keywords:</label>
                             <textarea
                                 use:sizeOnLoad
                                 bind:value={entry.keywords}
@@ -107,6 +108,7 @@
                             </textarea>
                         </div>
                         <div class="text">
+                            <label for="text">Memory text:</label>
                             <textarea
                                 use:sizeOnLoad
                                 bind:value={entry.text}
@@ -117,20 +119,24 @@
                                 disabled={generating}>
                             </textarea>
                         </div>
-                        <Button onclick={( ) => remove( index )} disabled={generating}>Remove</Button>
-                        <label><input bind:group={entry.included} type="radio" name={`included_${index}`} value={MEMORY_INCLUDE} onchange={( ) => onentrychanged?.( entry )}/> include</label>
-                        <label><input bind:group={entry.included} type="radio" name={`included_${index}`} value={MEMORY_EXCLUDE} onchange={( ) => onentrychanged?.( entry )}/> exclude</label>
-                        <label><input bind:group={entry.included} type="radio" name={`included_${index}`} value={MEMORY_AUTO}    onchange={( ) => onentrychanged?.( entry )}/> auto</label>
+                        <div class="entry-controls">
+                            <Button onclick={( ) => remove( index )} disabled={generating} class="danger">Remove</Button>
+                            <div class="radio-group">
+                                <label class="radio-label"><input bind:group={entry.included} type="radio" name={`included_${index}`} value={MEMORY_INCLUDE} onchange={( ) => onentrychanged?.( entry )}/> include</label>
+                                <label class="radio-label"><input bind:group={entry.included} type="radio" name={`included_${index}`} value={MEMORY_EXCLUDE} onchange={( ) => onentrychanged?.( entry )}/> exclude</label>
+                                <label class="radio-label"><input bind:group={entry.included} type="radio" name={`included_${index}`} value={MEMORY_AUTO}    onchange={( ) => onentrychanged?.( entry )}/> auto</label>
+                            </div>
+                        </div>
                     </div>
                 </AccordionItem>
             </div>
         {/each}
     </Accordion>
 {:else}
-    <div class="memory-entry">
-        <ul class="title">
-            <li>...</li>
-        </ul>
+    <div class="memory-entry empty">
+        <div class="title">
+            <span class="keywords">No memories yet</span>
+        </div>
     </div>
 {/if}
 <div class="entry">
@@ -164,64 +170,142 @@
             </textarea>
         {/snippet}
     </Row>
-    <Button onclick={( ) => add( keywords, text )} disabled={keywords.trim( ) === '' || text.trim( ) === '' || generating}>Add</Button>
+    <Button onclick={( ) => add( keywords, text )} disabled={keywords.trim( ) === '' || text.trim( ) === '' || generating} class="primary">Add Memory</Button>
 </div>
 
 <style lang="scss">
     :global( .accordion ) {
-        margin: 0;
+        margin:        0;
+        border-radius: var( --border-radius );
+        overflow:      hidden;
     }
+
     :global( .accordion-item ) {
-        display: flex;
-        flex-direction: column;
-        padding: 0.5em 0 0 0;
+        display:              flex;
+        flex-direction:       column;
+        overflow:             hidden;
+        margin-bottom:        1rem;
+        border-radius:        var( --border-radius );
+        background-color:     var( --bg-secondary );
+        transition: transform var( --transition-speed ) ease;
     }
-    :global( .accordion-item:first-of-type ) {
-        padding: 0;
+
+    :global( .accordion-item:last-child ) {
+        margin-bottom: 0;
     }
+
     :global( .accordion-item-header ) {
-        color: #eee;
-        font-family: 'Inconsolata';
-        font-size: unset;
-        text-align: left;
+        background-color: var( --bg-tertiary );
+        color:            var( --text-primary );
+        padding:          1rem 1rem;
+        font-family:      inherit;
+        font-size:        unset;
+        text-align:       left;
+        cursor:           pointer;
+
+        &:hover {
+            background-color: var( --bg-hover );
+        }
     }
 
     .memory-entry {
-        border: 1px solid #999;
-        // border-radius: 15px;
-        margin: 0 0 0.5em 0;
+        border: 1px solid var( --border-color );
+        border-radius:    var( --border-radius );
+        background-color: var( --bg-secondary );
+        margin-bottom:    1rem;
+
+        &.empty {
+            padding:          1rem;
+            color:            var( --text-muted );
+            background-color: var( --bg-tertiary );
+            text-align:       center;
+        }
 
         .title {
-            display: flex;
-            margin: 0;
-            padding: 1em 1em 1em 2rem;
-            list-style-type: square;
+            display:     flex;
+            align-items: center;
+            gap:         0.5rem;
+            padding:     0.5rem 0;
 
-            li {
-                flex: 1;
-                margin: 0;
+            .keywords {
+                flex:        1;
+                font-weight: 500;
+            }
+
+            .status {
+                padding:       0 0.5rem;
+                border-radius: 1rem;
+                font-size:     1rem;
+
+                &.included {
+                    background-color: var( --success-color );
+                    color:          white;
+                }
+
+                &.excluded {
+                    background-color: var( --error-color );
+                    color:          white;
+                }
             }
         }
+
         .content {
-            padding: 0 1em 1em 1rem;
+            padding: 1rem;
+
+            label {
+                color:         var( --text-secondary );
+                display:       block;
+                margin-bottom: 0.5rem;
+                font-weight:   500;
+            }
+
+            .keywords, .text {
+                margin-bottom: 1rem;
+
+                textarea {
+                    width:         100%;
+                    min-height:    2.5rem;
+                    border-radius: var( --border-radius );
+                    resize:        vertical;
+                }
+            }
+
+            .entry-controls {
+                display:     flex;
+                flex-wrap:   wrap;
+                align-items: center;
+                gap:         1rem;
+
+
+                .radio-group {
+                    display:   flex;
+                    flex-wrap: wrap;
+                    gap:       1rem;
+
+                    .radio-label {
+                        display:     flex;
+                        align-items: center;
+                        gap:         0.5rem;
+
+                        input[type="radio"] {
+                            margin:       0;
+                            accent-color: var( --accent-primary );
+                        }
+                    }
+                }
+            }
         }
     }
-    .keywords {
-        display: flex;
-        padding: 0 0 0.5em 0;
 
-        textarea {
-            flex: 1;
-            resize: vertical;
-        }
-    }
-    .text {
-        display: flex;
-        padding: 0 0 0.5em 0;
+    .entry {
+        margin-top:       1.5rem;
+        padding:          1.5rem;
+        border: 1px solid var( --border-color );
+        border-radius:    var( --border-radius );
+        background-color: var( --bg-secondary );
 
-        textarea {
-            flex: 1;
-            resize: vertical;
+        :global( button ) {
+            align-self: flex-start;
         }
     }
 </style>
