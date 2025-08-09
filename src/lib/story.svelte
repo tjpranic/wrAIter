@@ -105,7 +105,7 @@
             selected = selected.slice( cutoffPoint );
         }
 
-        console.log( selected );
+        // console.log( selected );
 
         let storySoFar = '';
 
@@ -140,7 +140,7 @@
             }
         );
 
-        console.log( text );
+        // console.log( text );
 
         return text;
     }
@@ -373,7 +373,7 @@
         }
 
         .prompt {
-            margin:           0 0 1em 0;
+            margin:           0 0 0.5em 0;
             padding:          1rem;
             border-radius:    var( --border-radius );
             background-color: var( --bg-input );
